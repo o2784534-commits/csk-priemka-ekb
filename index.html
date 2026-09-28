@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Приёмка квартир — Центр строительного контроля</title>
+  <meta name="description" content="Профессиональный осмотр квартиры строительными экспертами. Екатеринбург. Запись по телефону 8 922 177 27 71.">
+  <style>
+    :root{
+      --bg:#f7f7f5;
+      --panel:#ffffff;
+      --panel-alt:#f1f3f2;
+      --text:#232624;
+      --muted:#616865;
+      --line:#e4e8e5;
+      --accent:#ef7d68;
+      --accent-dark:#dd694f;
+      --shadow:0 18px 55px rgba(30, 35, 33, .08);
+      --max:1180px;
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.45;
+    }
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(calc(100% - 32px), var(--max)); margin:auto}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(0,0,0,.04);
+    }
+    .topbar .inner{
+      min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:18px;
+    }
+    .logo{width:190px; max-width:44vw}
+    .nav-right{display:flex; align-items:center; gap:14px}
+    .phone{font-weight:800; font-size:18px; white-space:nowrap}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:50px; padding:0 22px; border-radius:16px;
+      font-weight:800; transition:.18s transform,.18s box-shadow,.18s background;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:var(--accent); color:#fff; box-shadow:0 12px 30px rgba(239,125,104,.30)}
+    .btn.primary:hover{background:var(--accent-dark)}
+    .btn.secondary{background:#fff; color:var(--text); border:1px solid var(--line)}
+    .hero{
+      position:relative;
+      min-height:620px;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      background:url('assets/hero-bg.jpg') center center / cover no-repeat;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.32) 0%, rgba(255,255,255,.18) 48%, rgba(255,255,255,.02) 100%);
+    }
+    .hero .content{
+      position:relative; z-index:1;
+      width:min(100%, 760px);
+      padding:42px 44px;
+      margin:52px 0;
+      border-radius:28px;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(8px);
+      box-shadow:0 24px 70px rgba(31,36,33,.13);
+      border:1px solid rgba(255,255,255,.78);
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:13px; letter-spacing:.12em; text-transform:uppercase; font-weight:800; color:var(--accent-dark);
+      background:rgba(239,125,104,.10); border:1px solid rgba(239,125,104,.20);
+      padding:10px 14px; border-radius:999px;
+    }
+    h1{
+      margin:18px 0 18px;
+      font-size:clamp(38px, 6vw, 72px);
+      line-height:1.03; letter-spacing:-.04em;
+      max-width:700px;
+      color:#171a18;
+      text-shadow:0 1px 0 rgba(255,255,255,.6);
+    }
+    .lead{
+      font-size:clamp(20px, 2.4vw, 30px);
+      color:#47504c;
+      max-width:640px; margin:0 0 28px;
+    }
+    .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin:28px 0 14px}
+    .hero-note{color:var(--muted); font-size:15px}
+    .section{padding:72px 0}
+    .section-title{
+      font-size:clamp(30px, 4vw, 52px);
+      margin:0 0 18px;
+      letter-spacing:-.03em;
+    }
+    .section-text{color:var(--muted); font-size:18px; max-width:760px; margin:0 0 28px}
+    .grid-3{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+    }
+    .card{
+      background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+      padding:28px; box-shadow:var(--shadow);
+    }
+    .card .num{
+      width:44px; height:44px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      background:rgba(239,125,104,.12); color:var(--accent-dark); font-weight:900; margin-bottom:14px;
+    }
+    .card h3{margin:0 0 10px; font-size:24px}
+    .card p{margin:0; color:var(--muted)}
+    .steps{
+      display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
+    }
+    .step{
+      background:var(--panel-alt); border:1px solid var(--line); border-radius:22px; padding:24px;
+    }
+    .step span{
+      display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center;
+      border-radius:50%; background:#fff; border:1px solid var(--line); font-weight:900; margin-bottom:14px;
+    }
+    .step h4{margin:0 0 10px; font-size:20px}
+    .step p{margin:0; color:var(--muted)}
+    .video-block{
+      display:grid; grid-template-columns:1.05fr .95fr; gap:26px; align-items:center;
+      background:linear-gradient(180deg,#fff,#fafbfa);
+      border:1px solid var(--line); border-radius:32px; padding:22px; box-shadow:var(--shadow);
+    }
+    .video-shell{
+      overflow:hidden; border-radius:24px; background:#000;
+      box-shadow:0 24px 60px rgba(0,0,0,.16);
+    }
+    .video-shell video{width:100%; display:block}
+    .quote{
+      padding:10px 8px;
+    }
+    .quote h3{font-size:clamp(28px,3vw,42px); line-height:1.08; margin:0 0 16px}
+    .quote p{color:var(--muted); font-size:18px; margin:0 0 22px}
+    .trust{
+      display:grid; grid-template-columns:1fr 1fr; gap:18px;
+    }
+    .trust-box{
+      padding:28px; border-radius:26px; background:#fff; border:1px solid var(--line); box-shadow:var(--shadow);
+    }
+    .trust-box strong{display:block; font-size:25px; margin-bottom:8px}
+    .trust-box p{margin:0; color:var(--muted)}
+    .final{
+      padding:42px; border-radius:32px;
+      background:linear-gradient(135deg, rgba(239,125,104,.12), rgba(255,255,255,.95));
+      border:1px solid rgba(239,125,104,.24);
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+    .final h2{
+      font-size:clamp(34px,5vw,58px); margin:0 0 12px; letter-spacing:-.03em;
+    }
+    .final p{font-size:18px; color:var(--muted); margin:0 0 20px}
+    .big-phone{
+      display:block; font-size:clamp(32px,4vw,50px); font-weight:900; margin:0 0 24px;
+    }
+    footer{
+      padding:28px 0 96px; color:var(--muted); font-size:14px;
+    }
+    .mobile-bar{
+      display:none;
+      position:fixed; left:12px; right:12px; bottom:12px; z-index:30;
+      gap:10px; padding:10px; border-radius:18px;
+      background:rgba(255,255,255,.94); backdrop-filter:blur(14px);
+      border:1px solid rgba(0,0,0,.06); box-shadow:0 12px 35px rgba(0,0,0,.12);
+    }
+    .mobile-bar .btn{flex:1; min-height:48px; font-size:14px}
+    @media (max-width: 980px){
+      .grid-3{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr 1fr}
+      .video-block{grid-template-columns:1fr}
+      .trust{grid-template-columns:1fr}
+    }
+    @media (max-width: 760px){
+      .topbar .btn.secondary{display:none}
+      .phone{display:none}
+      .hero{min-height:auto}
+      .hero::before{background:linear-gradient(180deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.88) 54%, rgba(255,255,255,.78) 100%)}
+      .hero .content{padding:44px 0 52px}
+      .steps{grid-template-columns:1fr}
+      .section{padding:52px 0}
+      .final{padding:30px 20px}
+      .mobile-bar{display:flex}
+      footer{padding-bottom:108px}
+    }
+  
+    .credentials-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:26px}
+    .credentials-note{max-width:560px;color:var(--muted);margin:0}
+    .credentials{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .credential{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+    .credential-media{height:280px;background:#f4f5f3;display:flex;align-items:flex-start;justify-content:center;overflow:hidden}
+    .credential-media img{width:100%;height:100%;object-fit:cover;object-position:top center}
+    .credential-body{padding:20px}
+    .credential-body h3{font-size:19px;line-height:1.25;margin:0 0 8px}
+    .credential-body p{margin:0;color:var(--muted);font-size:14px}
+    .expert-badge{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 12px;border-radius:999px;background:rgba(239,125,104,.10);color:var(--accent-dark);font-weight:800;font-size:13px}
+    @media(max-width:980px){.credentials{grid-template-columns:1fr 1fr}.credentials-head{align-items:start;flex-direction:column}}
+    @media(max-width:620px){.credentials{grid-template-columns:1fr}.credential-media{height:330px}}
+
+
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+    .price-card{background:#fff;border:1px solid var(--line);border-radius:26px;padding:28px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .price-card.featured{border:2px solid rgba(239,125,104,.55);position:relative}
+    .price-tag{display:inline-flex;align-self:flex-start;padding:8px 12px;border-radius:999px;background:rgba(239,125,104,.12);color:var(--accent-dark);font-weight:900;font-size:13px;margin-bottom:14px}
+    .price-card h3{font-size:28px;margin:0 0 8px}
+    .price-sub{color:var(--muted);margin:0 0 18px}
+    .price-list{display:grid;gap:10px;margin:0 0 22px;padding:0;list-style:none}
+    .price-list li{position:relative;padding-left:26px;color:#404643}
+    .price-list li:before{content:"✓";position:absolute;left:0;top:0;color:var(--accent-dark);font-weight:900}
+    .tariffs{display:grid;gap:8px;margin:6px 0 22px;padding-top:18px;border-top:1px solid var(--line)}
+    .tariff-row{display:flex;justify-content:space-between;gap:18px;align-items:center;font-size:16px}
+    .tariff-row strong{font-size:19px;white-space:nowrap}
+    .price-main{font-size:38px;font-weight:900;letter-spacing:-.03em;margin:10px 0 22px}
+    .price-card .btn{margin-top:auto}
+    .pricing-note{margin-top:18px;color:var(--muted);font-size:14px}
+    .comparison{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
+    .comparison table{width:100%;border-collapse:collapse}
+    .comparison th,.comparison td{padding:16px 18px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    .comparison th{background:#f7f8f6;font-size:14px;color:#555d59}
+    .comparison tr:last-child td{border-bottom:none}
+    .check{color:var(--accent-dark);font-weight:900}
+    @media(max-width:980px){.pricing-grid{grid-template-columns:1fr}.price-card{padding:24px}.comparison{overflow-x:auto}.comparison table{min-width:760px}}
+
+
+    .blowerdoor-block{
+      grid-template-columns:1.3fr .7fr;
+      padding:20px 24px;
+    }
+    .blowerdoor-block .video-shell{
+      max-width:430px;
+      justify-self:end;
+      border-radius:20px;
+    }
+    .blowerdoor-block .video-shell video{
+      max-height:360px;
+      object-fit:cover;
+    }
+    @media(max-width:980px){
+      .blowerdoor-block{grid-template-columns:1fr}
+      .blowerdoor-block .video-shell{max-width:520px;justify-self:center}
+    }
+    @media(max-width:760px){
+      .hero .content{padding:28px 22px;margin:28px 0;background:rgba(255,255,255,.91)}
+      .blowerdoor-block .video-shell{max-width:100%}
+    }
+
+
+    .blowerdoor-wrap{
+      display:grid;
+      grid-template-columns:1.35fr .65fr;
+      gap:24px;
+      align-items:center;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:24px 28px;
+      box-shadow:var(--shadow);
+    }
+    .blowerdoor-media{
+      max-width:360px;
+      justify-self:end;
+      overflow:hidden;
+      border-radius:20px;
+      background:#000;
+      box-shadow:0 14px 36px rgba(0,0,0,.12);
+    }
+    .blowerdoor-media video{
+      width:100%;
+      display:block;
+      max-height:300px;
+      object-fit:cover;
+    }
+    .blowerdoor-copy h3{
+      font-size:clamp(26px,3vw,40px);
+      line-height:1.08;
+      margin:0 0 14px;
+    }
+    .blowerdoor-copy p{
+      color:var(--muted);
+      font-size:17px;
+      margin:0 0 14px;
+    }
+    @media(max-width:900px){
+      .blowerdoor-wrap{grid-template-columns:1fr}
+      .blowerdoor-media{max-width:430px;justify-self:center}
+    }
+
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap inner">
+      <a href="#top"><img class="logo" src="assets/logo.png" alt="Центр строительного контроля"></a>
+      <div class="nav-right">
+        <a class="phone" href="tel:+79221772771">8 922 177 27 71</a>
+        <a class="btn secondary" href="https://vk.me/club180557864" target="_blank" rel="noopener">Написать в VK</a>
+        <a class="btn primary" href="tel:+79221772771">Записаться</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="content">
+          <div class="eyebrow">Приёмка квартир • Екатеринбург</div>
+          <h1>Находим дефекты, которые прячут строители.</h1>
+          <p class="lead">Профессиональный осмотр квартиры строительными экспертами.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="tel:+79221772771">Записаться на приёмку</a>
+            <a class="btn secondary" href="https://vk.me/club180557864" target="_blank" rel="noopener">Написать в VK</a>
+          </div>
+          <div class="hero-note">Телефон для записи: 8 922 177 27 71</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">Что получает заказчик</h2>
+        <p class="section-text">Коротко и по делу: профессиональный осмотр квартиры, фиксация выявленных недостатков и понятный результат, с которым удобно принимать квартиру.</p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="num">01</div>
+            <h3>Профессиональный осмотр</h3>
+            <p>Квартиру осматривает специалист с профильными знаниями в строительстве и обследовании объектов.</p>
+          </article>
+          <article class="card">
+            <div class="num">02</div>
+            <h3>Фиксация недостатков</h3>
+            <p>Выявленные дефекты фиксируются во время приёмки, чтобы вы понимали фактическое состояние квартиры.</p>
+          </article>
+          <article class="card">
+            <div class="num">03</div>
+            <h3>Понятный результат</h3>
+            <p>После осмотра вы получаете перечень замечаний и понимаете, на что обратить внимание при передаче квартиры.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <h2 class="section-title">Как проходит осмотр</h2>
+        <div class="steps">
+          <div class="step"><span>1</span><h4>Выезд на объект</h4><p>Согласовываем дату и время приёмки квартиры.</p></div>
+          <div class="step"><span>2</span><h4>Осмотр квартиры</h4><p>Проводим профессиональный строительный осмотр на объекте.</p></div>
+          <div class="step"><span>3</span><h4>Фиксация замечаний</h4><p>Отмечаем выявленные недостатки по результатам осмотра.</p></div>
+          <div class="step"><span>4</span><h4>Результат для заказчика</h4><p>Вы получаете понятный перечень замечаний для приёмки квартиры.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="video-block">
+          <div class="video-shell">
+            <video src="assets/inspection.mp4" autoplay muted loop playsinline controls preload="metadata"></video>
+          </div>
+          <div class="quote">
+            <h3>Реальный осмотр квартиры — без лишних слов.</h3>
+            <p>На странице — фрагмент фактической приёмки. Это не стоковые кадры, а реальная работа по осмотру квартиры и фиксации недостатков.</p>
+            <div class="cta-row">
+              <a class="btn primary" href="tel:+79221772771">Позвонить</a>
+              <a class="btn secondary" href="https://t.me/priemka_ekb" target="_blank" rel="noopener">Telegram</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="blowerdoor-wrap">
+          <div class="blowerdoor-copy">
+            <div class="eyebrow" style="margin-bottom:14px">Пакет «Эксперт +»</div>
+            <h3>Обследование квартиры аэродверью</h3>
+            <p>Дополнительная проверка на воздухопроницаемость помогает выявить зоны утечек воздуха через оконные конструкции, монтажные швы и другие участки ограждающих конструкций.</p>
+            <p>Обследование выполняется с использованием аэродвери и тепловизора. По результатам подготавливается электронный отчёт с фиксацией обнаруженных утечек.</p>
+            <div class="cta-row">
+              <a class="btn primary" href="#prices">Посмотреть стоимость</a>
+              <a class="btn secondary" href="tel:+79221772771">Записаться</a>
+            </div>
+          </div>
+          <div class="blowerdoor-media">
+            <video src="assets/blowerdoor.mp4" autoplay muted loop playsinline controls preload="metadata"></video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="trust">
+          <div class="trust-box">
+            <strong>Центр строительного контроля</strong>
+            <p>Экспертиза • Приёмка • Контроль</p>
+          </div>
+          <div class="trust-box">
+            <strong>Работаем по Екатеринбургу</strong>
+            <p>Профессиональный осмотр квартир в новостройках и сопровождение при приёмке объекта.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="section" id="prices" style="padding-top:0">
+      <div class="wrap">
+        <h2 class="section-title">Стоимость приёмки квартиры</h2>
+        <p class="section-text">Три формата — от профессионального осмотра квартиры до полного экспертного сопровождения с оценкой стоимости устранения недостатков.</p>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <div class="price-tag">Экспертный осмотр</div>
+            <h3>Эксперт</h3>
+            <p class="price-sub">Профессиональная приёмка квартиры с фиксацией выявленных недостатков.</p>
+            <ul class="price-list">
+              <li>проверка ровности строительных конструкций;</li>
+              <li>осмотр чистовых поверхностей;</li>
+              <li>проверка правильности установки строительных изделий;</li>
+              <li>проверка работоспособности инженерных систем;</li>
+              <li>акт осмотра с фотофиксацией в электронном виде.</li>
+            </ul>
+            <div class="tariffs">
+              <div class="tariff-row"><span>Студия</span><strong>7 000 ₽</strong></div>
+              <div class="tariff-row"><span>1-комнатная</span><strong>8 000 ₽</strong></div>
+              <div class="tariff-row"><span>2-комнатная</span><strong>9 000 ₽</strong></div>
+              <div class="tariff-row"><span>3-комнатная</span><strong>10 000 ₽</strong></div>
+            </div>
+            <a class="btn secondary" href="tel:+79221772771">Записаться</a>
+          </article>
+
+          <article class="price-card featured">
+            <div class="price-tag">Расширенная диагностика</div>
+            <h3>Эксперт +</h3>
+            <p class="price-sub">Всё из пакета «Эксперт» плюс диагностика воздухопроницаемости ограждающих конструкций.</p>
+            <ul class="price-list">
+              <li>полный экспертный осмотр;</li>
+              <li>проверка воздухопроницаемости с использованием аэродвери;</li>
+              <li>тепловизионное обследование;</li>
+              <li>выявление зон утечек воздуха;</li>
+              <li>электронный отчёт об обнаруженных утечках.</li>
+            </ul>
+            <div class="tariffs">
+              <div class="tariff-row"><span>Студия</span><strong>15 000 ₽</strong></div>
+              <div class="tariff-row"><span>1-комнатная</span><strong>16 000 ₽</strong></div>
+              <div class="tariff-row"><span>2-комнатная</span><strong>17 000 ₽</strong></div>
+              <div class="tariff-row"><span>3-комнатная</span><strong>18 000 ₽</strong></div>
+            </div>
+            <a class="btn primary" href="tel:+79221772771">Записаться</a>
+          </article>
+
+          <article class="price-card">
+            <div class="price-tag">Полное сопровождение</div>
+            <h3>Эксперт Premium</h3>
+            <p class="price-sub">Для случаев, когда требуется не только выявить недостатки, но и подготовить документы для предъявления застройщику.</p>
+            <ul class="price-list">
+              <li>всё из пакета «Эксперт +»;</li>
+              <li>заключение о выявленных недостатках;</li>
+              <li>смета стоимости устранения недостатков;</li>
+              <li>подготовка досудебной претензии застройщику.</li>
+            </ul>
+            <div class="price-main">40 000 ₽</div>
+            <a class="btn secondary" href="tel:+79221772771">Обсудить приёмку</a>
+          </article>
+        </div>
+
+        <div class="comparison" aria-label="Сравнение пакетов">
+          <table>
+            <thead>
+              <tr>
+                <th>Что входит</th>
+                <th>Эксперт</th>
+                <th>Эксперт +</th>
+                <th>Эксперт Premium</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Профессиональный осмотр квартиры</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+              <tr><td>Акт осмотра с фотофиксацией</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+              <tr><td>Аэродверь + тепловизор</td><td>—</td><td class="check">✓</td><td class="check">✓</td></tr>
+              <tr><td>Отчёт об утечках воздуха</td><td>—</td><td class="check">✓</td><td class="check">✓</td></tr>
+              <tr><td>Экспертное заключение о недостатках</td><td>—</td><td>—</td><td class="check">✓</td></tr>
+              <tr><td>Смета на устранение недостатков</td><td>—</td><td>—</td><td class="check">✓</td></tr>
+              <tr><td>Досудебная претензия застройщику</td><td>—</td><td>—</td><td class="check">✓</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="pricing-note">Итоговая стоимость и состав работ подтверждаются при записи с учётом объекта и задачи заказчика.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="credentials-head">
+          <div>
+            <h2 class="section-title" style="margin-bottom:10px">Квалификация эксперта</h2>
+            <div class="expert-badge">Берсенев Юрий Анатольевич</div>
+          </div>
+          <p class="credentials-note">Приёмку проводит строительный эксперт с профильной подготовкой и действующими документами, подтверждающими квалификацию.</p>
+        </div>
+
+        <div class="credentials">
+          <article class="credential">
+            <div class="credential-media"><img src="assets/court-expert.png" alt="Сертификат судебного эксперта"></div>
+            <div class="credential-body">
+              <h3>Сертификат судебного эксперта</h3>
+              <p>Сертификат соответствия судебного эксперта. Срок действия — до 24 июля 2027 года.</p>
+            </div>
+          </article>
+
+          <article class="credential">
+            <div class="credential-media"><img src="assets/windows-expert.png" alt="Сертификат эксперта по качеству светопрозрачных конструкций"></div>
+            <div class="credential-body">
+              <h3>Эксперт по оконным конструкциям</h3>
+              <p>Дополнительная профессиональная подготовка по качеству светопрозрачных конструкций из ПВХ-профилей.</p>
+            </div>
+          </article>
+
+          <article class="credential">
+            <div class="credential-media"><img src="assets/nopriz.png" alt="Уведомление НОПРИЗ"></div>
+            <div class="credential-body">
+              <h3>Национальный реестр специалистов</h3>
+              <p>Сведения о специалисте включены в Национальный реестр специалистов НОПРИЗ.</p>
+            </div>
+          </article>
+
+          <article class="credential">
+            <div class="credential-media"><img src="assets/sro.png" alt="Выписка из реестра СРО"></div>
+            <div class="credential-body">
+              <h3>Членство в СРО</h3>
+              <p>Выписка из единого реестра сведений о членах саморегулируемых организаций в области проектирования.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="final">
+          <h2>Запишитесь на приёмку квартиры</h2>
+          <p>Позвоните или напишите — согласуем дату и время осмотра.</p>
+          <a class="big-phone" href="tel:+79221772771">8 922 177 27 71</a>
+          <div class="cta-row" style="justify-content:center">
+            <a class="btn primary" href="tel:+79221772771">Позвонить</a>
+            <a class="btn secondary" href="https://vk.me/club180557864" target="_blank" rel="noopener">VK</a>
+            <a class="btn secondary" href="https://t.me/priemka_ekb" target="_blank" rel="noopener">Telegram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© Центр строительного контроля · Екатеринбург</div>
+  </footer>
+
+  <div class="mobile-bar">
+    <a class="btn primary" href="tel:+79221772771">Позвонить</a>
+    <a class="btn secondary" href="https://vk.me/club180557864" target="_blank" rel="noopener">Написать</a>
+  </div>
+
+  <script>
+    const p = new URLSearchParams(location.search);
+    if (p.has('utm_source')) sessionStorage.setItem('csk_utm', p.toString());
+  </script>
+</body>
+</html>
